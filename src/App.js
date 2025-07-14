@@ -15,9 +15,9 @@ function App() {
   return (
     <div style={{ padding: "20px" }}>
       {quotes.map((quote) => (
-        <h3 key={quote.id}>
+        <h1 key={quote.id}>
           "{quote.quote}" - {quote.author}
-        </h3>
+        </h1>
       ))}
     </div>
   );
