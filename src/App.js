@@ -1,23 +1,24 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useEffect, useState } from "react";
 
 function App() {
+  const [quotes, setQuotes] = useState([]);
+
+  useEffect(() => {
+    fetch("https://dummyjson.com/quotes")
+      .then((res) => res.json())
+      .then((data) => {
+        setQuotes(data.quotes.slice(0, 10));
+      })
+      .catch((error) => console.error("Error fetching quotes:", error));
+  }, []); 
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div style={{ padding: "20px" }}>
+      {quotes.map((quote) => (
+        <h3 key={quote.id}>
+          "{quote.quote}" - {quote.author}
+        </h3>
+      ))}
     </div>
   );
 }
